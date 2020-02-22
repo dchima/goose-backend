@@ -1,6 +1,5 @@
 import env from './env';
 
-
 module.exports = {
   production: {
     url: env.PRO_URL,

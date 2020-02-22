@@ -10,15 +10,10 @@
     "target": "es6",
     "noImplicitAny": true,
     "moduleResolution": "node",
-    "isolatedModules": true,
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "strict": true,
-    "removeComments": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "importHelpers": true,
     "typeRoots": [
       "node_modules/@types"
     ],
