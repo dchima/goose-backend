@@ -7,8 +7,8 @@ import morgan from 'morgan';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import { AddressInfo } from 'net';
-import { env } from './config';
-import routes from './routes';
+import { env } from '@/config';
+import routes from '@/routes';
 
 const production = env.NODE_ENV === 'production';
 
