@@ -59,7 +59,7 @@ if (!production) {
 app.use(routes);
 app.get('/', (req, res) =>
   res.status(200).send({
-    message: 'Welcome to greenpot Delivery',
+    message: 'Welcome to Link Loader',
   })
 );
 app.all('*', (req, res) => res.send({ message: 'route not found' }));
