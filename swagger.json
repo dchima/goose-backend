@@ -1,3 +1,170 @@
 {
-
+  "swagger": "2.0",
+  "info": {
+      "version": "1.0",
+      "title": "Link loader Web Tool",
+      "description": "Link loader is a tool for the web allowing users to save a share links"
+  },
+  "servers": [
+      {
+        "url": "http://localhost:3000/"
+      },
+      {
+        "url": "https://greenpot-api.herokuapp.com/"
+      }
+    ],
+  "host": "",
+  "basePath": "/v1.0/api",
+  "securityDefinitions": {
+      "Bearer": {
+          "description": "Standard Authorization header using the bearer scheme. Example: \"bearer {token}\"",
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header"
+      }
+  },
+  "tags": [
+      {
+          "name": "Auth",
+          "description": "Endpoint for user Authentication"
+      }
+  ],
+  "paths": {
+      "/auth/signup": {
+          "post": {
+              "description": "Register a User",
+              "summary": "Registers new user to database",
+              "tags": [
+                  "Auth"
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "security": [],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "description": "This is the request body object containing user information",
+                      "schema": {
+                          "$ref": "#/requestBody/userRegistration"
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "User registered successfully"
+                  },
+                  "400": {
+                      "description": "Please fill in the fields"
+                  },
+                  "409": {
+                      "description": "User with email already exists"
+                  },
+                  "500": {
+                      "description": "Internal Server Error"
+                  }
+              }
+          }
+      },
+      "/auth/login": {
+          "post": {
+              "description": "Login an existing user",
+              "summary": "Login a user to the application",
+              "tags": [
+                  "Auth"
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "security": [],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "description": "This is the request body object containing login information",
+                      "schema": {
+                          "$ref": "#/requestBody/userLogin"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "User login successfully"
+                  },
+                  "401": {
+                      "description": "invalid inputs"
+                  },
+                  "404": {
+                      "description": "User with email does not exists"
+                  },
+                  "500": {
+                      "description": "Internal Server Error"
+                  }
+              }
+          }
+      }
+  },
+  "requestBody": {
+      "userRegistration": {
+          "title": "User registration request",
+          "type": "object",
+          "properties": {
+              "firstName": {
+                  "description": "First name of the user",
+                  "type": "string"
+              },
+              "lastName": {
+                  "description": "Last name of the user",
+                  "type": "string"
+              },
+              "username": {
+                "description": "unique application username",
+                "type": "string"
+            },
+              "email": {
+                  "description": "Email of the user",
+                  "type": "string"
+              },
+              "password": {
+                  "description": "The Password of the user",
+                  "type": "string"
+              }
+          },
+          "example": {
+              "firstName": "King",
+              "lastName": "David",
+              "username": "kingdavid",
+              "email": "david@gmail.com",
+              "password": "Elija455h"
+              },
+          "required": [
+              "firstName, lastName, username, email, password"
+          ]
+      },
+      "userLogin": {
+          "title": "User login request",
+          "type": "object",
+          "properties": {
+              "email": {
+                  "description": "Email of the user",
+                  "type": "string"
+              },
+              "password": {
+                  "description": "The Password of the user",
+                  "type": "string"
+              }
+          },
+          "example": {
+              "email": "david@gmail.com",
+              "password": "Elija455h"
+              },
+          "required": [
+              "email, password"
+          ]
+      }
+  }
 }
+  
