@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as sequelizeConfig from '@/config/config';
+import * as sequelizeConfig from '@/config/config.json';
 import env from '@/config/env';
 
 // db environment housekeeping. Point to my env

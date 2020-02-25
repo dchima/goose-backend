@@ -8,6 +8,7 @@
     "lint": "eslint \"src/**/*.ts\"",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
+    "migrate": "sequelize db:migrate",
     "start": "tsc && node dist/index.js",
     "start:dev": "nodemon --watch 'src/**/*.ts' --exec ts-node -r tsconfig-paths/register src/index.ts"
   },

@@ -4,12 +4,12 @@ if (!isProduction) require('@babel/register');
 const path = require('path');
 
 module.exports = isProduction ? {
-  "config": path.resolve('./dist/config', 'config.js'),
+  "config": path.resolve('./dist/config', 'config.json'),
   "models-path": path.resolve('./dist/models'),
   "seeders-path": path.resolve('./dist/seeders'),
   "migrations-path": path.resolve('./dist/migrations')
 } : {
-   "config": path.resolve('./src/config', 'config.ts'),
+   "config": path.resolve('./src/config', 'config.json'),
   "models-path": path.resolve('./src/models'),
   "seeders-path": path.resolve('./src/seeders'),
   "migrations-path": path.resolve('./src/migrations')
