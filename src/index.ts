@@ -7,7 +7,7 @@ import morgan from 'morgan';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import { AddressInfo } from 'net';
-import { env } from '@/config';
+import env from '@/config/env';
 import routes from '@/routes';
 
 const production = env.NODE_ENV === 'production';
@@ -59,7 +59,7 @@ if (!production) {
 app.use(routes);
 app.get('/', (req, res) =>
   res.status(200).send({
-    message: 'Welcome to greenpot Delivery',
+    message: 'Welcome to Link Loader',
   })
 );
 app.all('*', (req, res) => res.send({ message: 'route not found' }));
