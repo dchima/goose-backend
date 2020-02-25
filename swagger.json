@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
       "version": "1.0",
-      "title": "Link loader Web Tool",
-      "description": "Link loader is a tool for the web allowing users to save a share links"
+      "title": "Link Loader Web Tool",
+      "description": "Link loader is a tool for the web allowing users to save and share links"
   },
   "servers": [
       {

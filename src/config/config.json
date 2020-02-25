@@ -1,8 +1,7 @@
 {
   "development": {
     "url": "postgres://apibase:apipassword@localhost:5432/goosedev",
-    "dialect": "postgres",
-    "operatorsAliases": false
+    "dialect": "postgres"
   },
   "test": {
     "url": "postgres://apibase:apipassword@localhost:5432/goosedev",
@@ -10,7 +9,6 @@
     "operatorsAliases": false
   },
   "production": {
-    "dialect": "postgres",
-    "operatorsAliases": false
+    "dialect": "postgres"
   }
 }

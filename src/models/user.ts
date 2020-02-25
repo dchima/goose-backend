@@ -2,7 +2,7 @@ import * as Sequelize from 'sequelize';
 
 // model attributes interface to keep ts happy
 
-interface UserAttributes {
+export interface UserAttributes {
   id?: number;
   firstName: string;
   lastName: string;
@@ -15,10 +15,10 @@ interface UserAttributes {
 }
 
 // still not sure how sequelize is creating this instance
-type UserInstance = Sequelize.Instance<UserAttributes> & UserAttributes;
+export type UserInstance = Sequelize.Instance<UserAttributes> & UserAttributes;
 
 // okay, sorta familiar with these next steps. let's declare the fields
-export default (
+export const User = (
   sequelize: Sequelize.Sequelize,
   DataTypes: Sequelize.DataTypes
 ): Sequelize.Model<UserInstance, UserAttributes> => {
