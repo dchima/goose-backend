@@ -1,34 +1,55 @@
 import Sequelize from 'sequelize';
+import * as cls from 'continuation-local-storage';
 import * as fs from 'fs';
 import * as path from 'path';
 import sequelizeConfig from '@/config/config.json';
 import env from '@/config/env';
+import { UserAttributes, UserInstance } from './user';
 
+export interface SequelizeModels {
+  User: Sequelize.Model<UserInstance, UserAttributes>;
+}
 // db environment housekeeping. Point to my env
-const basename: string = path.basename(__filename);
 const environment: string = env.NODE_ENV || 'development';
-const config = sequelizeConfig[environment];
 
-// setup my database
-const sequelize = new Sequelize(config.url, config);
-if (environment === 'test') config.logging = false;
-const db: any = {};
+class Database {
+  private basename: string;
 
-// find module folder and all module files
-fs.readdirSync(__dirname)
-  .filter(file => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
-  .forEach(file => {
-    const model = sequelize.import(path.join(__dirname, file));
-    db[model.name] = model;
-  });
+  private models: SequelizeModels;
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+  private sequelize: Sequelize.Sequelize;
+
+  constructor() {
+    this.basename = path.basename(__filename);
+    const config = sequelizeConfig[environment];
+    if (environment === 'test') config.logging = false;
+    (Sequelize as any).cls = cls.createNamespace('sequelize-transaction');
+    this.sequelize = new Sequelize(config.url, config);
+    this.models = {} as any;
+
+    fs.readdirSync(__dirname)
+      .filter(file => file.indexOf('.') !== 0 && file !== this.basename && file.slice(-3) === '.js')
+      .forEach((file: string) => {
+        const model = this.sequelize.import(path.join(__dirname, file));
+        this.models[(model as any).name] = model;
+      });
+
+    Object.keys(this.models).forEach((modelName: string) => {
+      if (typeof this.models[modelName].associate === 'function') {
+        this.models[modelName].associate(this.models);
+      }
+    });
   }
-});
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+  getModels(): SequelizeModels {
+    return this.models;
+  }
 
-export default db;
+  getSequelize(): Sequelize.Sequelize {
+    return this.sequelize;
+  }
+}
+
+const database = new Database();
+export const models = database.getModels();
+export const sequelize = database.getSequelize();

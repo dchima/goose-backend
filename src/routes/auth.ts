@@ -1,10 +1,11 @@
 import { Request, Response, Router } from 'express';
-import db from '@/models';
+import { models } from '@/models';
 import { UserAttributes } from '@/models/user';
 import { successResponse, errorResponse } from '@/utils';
 
-const { User } = db;
+const { User } = models;
 const router = Router();
+console.log('model :', models);
 router.post('/signup', async (req: Request, res: Response) => {
   try {
     const user: UserAttributes = {
