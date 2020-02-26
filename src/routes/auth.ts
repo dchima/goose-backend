@@ -1,13 +1,13 @@
 import { Request, Response, Router } from 'express';
-import db from '@/models';
-import { UserAttributes } from '@/models/user';
+import { connection } from '@/config/connection';
+import User from '@/entity/user';
 import { successResponse, errorResponse } from '@/utils';
 
-const { User } = db;
 const router = Router();
 router.post('/signup', async (req: Request, res: Response) => {
+  const userModel = (await connection).getRepository(User);
   try {
-    const user: UserAttributes = {
+    const body = {
       firstName: 'John',
       lastName: 'Doe',
       username: 'johndoe',
@@ -15,10 +15,10 @@ router.post('/signup', async (req: Request, res: Response) => {
       password: 'jdoebobob',
       verified: true,
     };
-    const createdUser = await User.create(user);
+    const user = userModel.create(body);
+    const createdUser = await userModel.save(user);
     successResponse(res, { createdUser }, 201);
-  } catch (error) {
-    console.log(error);
+  } catch {
     errorResponse(res, {});
   }
 });
