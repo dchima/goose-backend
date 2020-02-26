@@ -11,7 +11,6 @@ import env from '@/config/env';
 import routes from '@/routes';
 
 const production = env.NODE_ENV === 'production';
-
 // Create global app object
 const app = express();
 
