@@ -10,6 +10,8 @@
     "target": "es6",
     "noImplicitAny": false,
     "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
@@ -26,8 +28,7 @@
     }
   },
   "include": [
-    "src",
-    "src/**/*.ts"
+    "**/src/**/*.ts"
   ],
   "exclude": [
     "node_modules"

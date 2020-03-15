@@ -20,6 +20,7 @@
   "plugins": ["@typescript-eslint", "import"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "off",
+    "lines-between-class-members": ["error", "never"],
     "@typescript-eslint/prefer-string-starts-ends-with": "off",
     "import/extensions": [
       "error",
